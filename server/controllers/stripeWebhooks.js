@@ -32,13 +32,12 @@ export const stripeWebhooks = async (request, response) => {
         //Send Confirmation Email
         await inngest.send({
           name: "app/show.booked",
-          //data: { bookingId }
-          data: { bookingId: booking._id.toString() }
+          data: { bookingId }
+          //data: { bookingId: booking._id.toString() }
         })
 
         break;
       }
-
       default:
         console.log('Unhandled event type:', event.type)
     }
