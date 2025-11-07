@@ -3,6 +3,7 @@ import User from "../models/User.js";
 import Booking from "../models/Booking.js";
 import Show from "../models/Show.js";
 import sendEmail from "../configs/nodemailer.js";
+import mongoose from "mongoose";
 
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: "movie-ticket-booking" });
@@ -79,7 +80,7 @@ const releaseSeatsAndDeleteBooking = inngest.createFunction(
 const sendBookingConfirmationEmail = inngest.createFunction(
   { id: "send-booking-confirmation-email" },
   { event: "app/show.booked" },
-  async ({ event, step }) => {
+  async ({ event }) => {
     const { bookingId } = event.data;
 
     const booking = await Booking.findById(bookingId).populate({
@@ -116,7 +117,7 @@ const sendShowReminders = inngest.createFunction(
     //Prepare reminder tasks
     const reminderTasks = await step.run("prepare-reminder-tasks", async () => {
       const shows = await Show.find({
-        showTime: { $gte: windowStart, $lte: in8Hours },
+        showDateTime: { $gte: windowStart, $lte: in8Hours },
       }).populate('movie')
 
       const tasks = [];
@@ -151,7 +152,7 @@ const sendShowReminders = inngest.createFunction(
         reminderTasks.map(task => sendEmail({
           to: task.userEmail,
           subject: `Reminder: Your movie "${task.movieTitle}" starts soon!`,
-          body: `<div style-"font-family:Arial, sans-serif; padding: 20px;">
+          body: `<div style="font-family:Arial, sans-serif; padding: 20px;">
             <h2>Hello ${task.userName},</h2>
             <p>
               is scheduled for <stong>${new Date(task.showTime), toLocaleDateString('en-US', { timeZone: 'America/New_York' })}</strong> at <strong>${new Date(task.showTime).toLocaleTimeString('en-US', { timeZone: 'America/New_York' })}</strong>.
@@ -192,7 +193,7 @@ const sendNewShowNotifications = inngest.createFunction(
       const body = `<div style="font-family: Arial, sans-serif; padding: 20px;>
         <h2>Hi ${userName},</h2>
         <p>We've just added a new show to our library:</p>
-        <h3 style="color: #F84565;>"${movieTitle}"</h3>
+        <h3 style="color: #F84565;">"${movieTitle}"</h3>
         <p>Visit our website</p>
         <br/>
         <p>Thanks,<br/>CinePass Team</p>
