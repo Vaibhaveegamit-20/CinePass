@@ -107,27 +107,6 @@ export const getShows = async (req, res) => {
   }
 }
 
-/*export const getShows = async (req, res) => {
-  try {
-    let shows = await Show.find({ showDateTime: { $gte: new Date() } })
-      .populate('movie')
-      .sort({ showDateTime: 1 });
-
-    if (shows.length === 0) {
-      const { data } = await axios.get(
-        'https://api.themoviedb.org/3/movie/now_playing',
-        { headers: { Authorization: `Bearer ${process.env.TMDB_API_KEY}` } }
-      );
-      shows = data.results;
-    }
-
-    res.json({ success: true, shows });
-  } catch (error) {
-    console.error(error);
-    res.json({ success: false, message: error.message });
-  }
-}; */
-
 
 //API to get a single show from the database
 export const getShow = async (req, res) => {
