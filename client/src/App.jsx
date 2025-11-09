@@ -36,7 +36,6 @@ const App = () => {
         <Route path='/my-bookings' element={<MyBookings/>}/>
         <Route path='/loading/:nextUrl' element={<Loading/>}/>
         <Route path='/favorite' element={<Favorite/>}/>
-
         <Route path='/admin/*' element={user?<Layout/>: (
           <div className='min-h-screen flex justify-center items-center'>
             <SignIn fallbackRedirectUrl={'/admin'}/>

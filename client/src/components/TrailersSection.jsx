@@ -26,7 +26,7 @@ const TrailersSection = () => {
       <div className="relative mt-6 flex justify-center">
         <BlurCircle top="-100px" right="-100px" />
 
-        {/* ✅ Direct iframe embed for guaranteed controls */}
+        {/* Direct iframe embed for guaranteed controls */}
         <iframe
           width="960"
           height="540"
@@ -35,7 +35,8 @@ const TrailersSection = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           className="rounded-lg shadow-lg w-full max-w-[960px] h-[540px]"
-        ></iframe>
+        >
+        </iframe>
       </div>
 
       {/* Thumbnail Selector */}

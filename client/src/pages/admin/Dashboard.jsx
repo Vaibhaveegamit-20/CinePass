@@ -1,6 +1,5 @@
 import { ChartLineIcon, CircleDollarSignIcon, PlayCircleIcon, StarIcon, UsersIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
-import { dummyDashboardData } from '../../assets/assets';
 import Loading from '../../components/Loading';
 import Title from '../../components/admin/Title';
 import BlurCircle from '../../components/BlurCircle';
@@ -26,7 +25,7 @@ const Dashboard = () => {
     {title: "Total Bookings", value: dashboardData.totalBookings || "0", icon: ChartLineIcon},
     {title: "Total Revenue", value:currency + dashboardData.totalRevenue || "0", icon: CircleDollarSignIcon},
     {title: "Active Shows", value: dashboardData.activeShows.length || "0", icon: PlayCircleIcon},
-     {title: "Total Users", value: dashboardData.totalUser || "0", icon: UsersIcon}
+    {title: "Total Users", value: dashboardData.totalUser || "0", icon: UsersIcon}
   ]
 
   const fetchDashboardData = async () => {

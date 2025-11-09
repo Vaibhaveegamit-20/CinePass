@@ -35,13 +35,13 @@ export const stripeWebhooks = async (request, response) => {
         //new
         console.log("🔹 Stripe webhook received bookingId:", bookingId)
 
-        // ✅ Validate the bookingId format
+        // Validate the bookingId format
         if (!mongoose.Types.ObjectId.isValid(bookingId)) {
           console.error("❌ Invalid bookingId received:", bookingId)
           return response.status(400).json({ success: false, message: "Invalid booking ID" })
         }
 
-        // ✅ Update booking payment status
+        // Update booking payment status
         const updatedBooking = await Booking.findByIdAndUpdate(
           bookingId,
           { isPaid: true, paymentLink: "" },

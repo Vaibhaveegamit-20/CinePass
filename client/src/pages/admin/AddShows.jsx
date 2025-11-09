@@ -148,11 +148,13 @@ const AddShows = () => {
             type="datetime-local" 
             step="60" //
             value={dateTimeInput} 
-            onChange={(e) => setDateTimeInput(e.target.value)} className='outline-none rounded-md' />
+            onChange={(e) => setDateTimeInput(e.target.value)} className='outline-none rounded-md' 
+          />
           <button 
             onClick={handleDateTimeAdd} 
-            className='bg-primary/80 text-white px-3 py-2 text-sm rounded-lg hover:bg-primary cursor-pointer'>
-            Add Time
+            className='bg-primary/80 text-white px-3 py-2 text-sm rounded-lg hover:bg-primary cursor-pointer'
+          >
+          Add Time
           </button>
         </div>
       </div>
@@ -178,8 +180,12 @@ const AddShows = () => {
               </ul>
             </div>
           )}
-          <button onClick={handleSubmit} disabled={addingShow}className='bg-primary text-white px-8 py-2 mt-6 rounded hover:bg-primary/90 transition-all cursor-pointer'>
-            Add Show
+          <button 
+            onClick={handleSubmit} 
+            disabled={addingShow}
+            className='bg-primary text-white px-8 py-2 mt-6 rounded hover:bg-primary/90 transition-all cursor-pointer'
+          >
+          Add Show
           </button>
     </>
   ) : <Loading/>

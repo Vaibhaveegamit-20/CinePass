@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { dummyShowsData } from '../../assets/assets';
 import Loading from '../../components/Loading';
 import Title from '../../components/admin/Title';
 import { dateFormat } from '../../lib/dateFormat';
@@ -14,17 +13,7 @@ const ListShows = () => {
   const [shows, setShows] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  /*const getAllShows = async() => {
-    try{
-      const {data} = await axios.get('/api/admin/all-shows', {headers: {Authorization: `Bearer ${await getToken()}` }});
-      setShows(data.shows)
-      setLoading(false);
-    }catch(error){
-      console.error(error);
-    }
-  } */
-
-    const getAllShows = async () => {
+  const getAllShows = async () => {
   try {
     const { data } = await axios.get('/api/admin/all-shows', {
       headers: { Authorization: `Bearer ${await getToken()}` },
