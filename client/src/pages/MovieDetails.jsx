@@ -7,6 +7,7 @@ import DateSelect from "../components/DateSelect.jsx";
 import MovieCard from "../components/MovieCard.jsx";
 import Loading from "../components/Loading.jsx";
 import { useAppContext } from "../context/AppContext.jsx";
+import toast from "react-hot-toast";
 
 const MovieDetails = () => {
   const navigate = useNavigate();
@@ -50,10 +51,11 @@ const MovieDetails = () => {
 
       if (data.success) {
         await fetchFavoriteMovies();
-        toast.success(data.message);
+        toast.success(data.message || "Failed to update favorites");
       }
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong");
     }
   };
 
@@ -77,7 +79,7 @@ const MovieDetails = () => {
             {show.movie.title}
           </h1>
           <div className="flex items-center gap-2 text-shadow-gray-300">
-            <StarIcon className="w-5 h-5 text-primry fill-primary text-primary" />
+            <StarIcon className="w-5 h-5 text-primary fill-primary text-primary" />
             {show.movie.vote_average.toFixed(1)} IMDb Rating
           </div>
 
