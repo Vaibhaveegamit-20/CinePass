@@ -103,17 +103,19 @@ const AddShows = () => {
     setAddingShow(false);
   };
 
-  /*useEffect(() => {
-    if(user){
-      fetchNowPlayingMovies();
-    }
-  }, []); */
-
   useEffect(() => {
     if (user) {
       fetchNowPlayingMovies();
     }
   }, [user]);
+
+  //added
+  const totalSelectedTimes = Object.values(dateTimeSelection).reduce(
+    (total, times) => total + times.length,
+    0,
+  );
+
+  const buttonText = totalSelectedTimes > 1 ? "Add Shows" : "Add Show";
 
   return nowPlayingMovies.length > 0 ? (
     <>
@@ -157,7 +159,7 @@ const AddShows = () => {
 
       {/*Show Price Input */}
       <div className="mt-8">
-        <label className="block text-sm font-medium mb-2">Show Price</label>
+        <label className="block text-sm font-medium mb-2">Add Show Price</label>
         <div className="inline-flex items-center gap-2 border border-gray-600 px-3 py-2 rounded-md">
           <p className="text-gray-400 text-sm">{currency}</p>
           <input
@@ -226,7 +228,7 @@ const AddShows = () => {
         disabled={addingShow}
         className="bg-primary text-white px-8 py-2 mt-6 rounded hover:bg-primary/90 transition-all cursor-pointer"
       >
-        Add Show
+        {buttonText}
       </button>
     </>
   ) : (
